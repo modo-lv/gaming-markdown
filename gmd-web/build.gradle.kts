@@ -1,10 +1,10 @@
 plugins {
-    id("gm-build")
+    id("gmd-build")
 }
 
 dependencies {
     implementation(libs.cli.args)
-    implementation(project(":gm-core"))
+    implementation(project(":gmd-core"))
 
     testImplementation(libs.bundles.core.test)
 }

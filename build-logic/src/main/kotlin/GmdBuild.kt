@@ -6,7 +6,7 @@ import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-class GMBuild : Plugin<Project> {
+class GmdBuild : Plugin<Project> {
     override fun apply(project: Project) {
         project.group = "lv.modo.gaming.markdown"
         project.rootProject.repositories.mavenCentral()

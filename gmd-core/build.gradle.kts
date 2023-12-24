@@ -1,5 +1,5 @@
 plugins {
-    id("gm-build")
+    id("gmd-build")
 }
 
 dependencies {

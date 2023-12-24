@@ -1,9 +1,9 @@
 rootProject.name = "gaming-markdown"
 
 include(
-    "gm-core",
+    "gmd-core",
 
-    "gm-web",
+    "gmd-web",
 )
 
 pluginManagement {

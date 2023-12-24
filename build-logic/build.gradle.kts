@@ -10,9 +10,9 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("gm-build") {
-            id = "gm-build"
-            implementationClass = "GMBuild"
+        create("gmd-build") {
+            id = "gmd-build"
+            implementationClass = "GmdBuild"
         }
     }
 }
