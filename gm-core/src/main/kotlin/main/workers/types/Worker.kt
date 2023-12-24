@@ -1,0 +1,23 @@
+package main.workers.types
+
+import elements.Element
+
+/**
+ * Common interface for all second-pass processing workers.
+ *
+ * Workers process [Element] trees created in the first pass and modify them to enable full GMD functionality.
+ */
+interface Worker {
+    /**
+     * Recursively process an element and all its sub-elements, invoking [processElement] on each one.
+     */
+    fun processTree(root: Element): Element =
+        processElement(root).apply {
+            subs = subs.map(::processTree).toMutableList()
+        }
+
+    /**
+     * Process an element with this worker.
+     */
+    fun processElement(element: Element): Element
+}
