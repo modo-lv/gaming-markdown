@@ -1,8 +1,8 @@
 package workers
 
 import elements.Content
-import main.FromMarkdown
-import main.workers.UnwrapContentWorker
+import build.FromMarkdown
+import build.workers.UnwrapContentWorker
 import org.amshove.kluent.`should be`
 import org.junit.jupiter.api.Test
 

@@ -1,9 +1,9 @@
-package main.workers
+package build.workers
 
 import elements.Content
 import elements.Element
-import main.WorkContext
-import main.workers.types.Worker
+import build.WorkContext
+import build.workers.types.Worker
 
 /**
  * "Unwraps" [Content] element by replacing it with its sub-elements.

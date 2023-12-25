@@ -1,4 +1,4 @@
-package main
+package build
 
 import elements.*
 import org.intellij.markdown.MarkdownElementTypes.ATX_1

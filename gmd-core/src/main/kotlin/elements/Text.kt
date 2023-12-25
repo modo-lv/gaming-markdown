@@ -1,7 +1,7 @@
 package elements
 
 import elements.types.Inline
-import main.MarkdownObject
+import build.MarkdownObject
 
 /**
  * Basic plain text.
