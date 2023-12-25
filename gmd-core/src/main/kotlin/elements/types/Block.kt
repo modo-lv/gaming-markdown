@@ -3,4 +3,4 @@ package elements.types
 /**
  * Indicates a block element.
  */
-interface Block
+interface Block : Element

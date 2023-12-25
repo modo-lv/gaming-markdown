@@ -6,6 +6,6 @@ import build.MarkdownObject
 /**
  * Basic plain text.
  */
-class Text(mdo: MarkdownObject): Element(), Inline {
+class Text(mdo: MarkdownObject): ElementBase(), Inline {
     val content = mdo.content
 }

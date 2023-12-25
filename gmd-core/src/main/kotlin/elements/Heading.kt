@@ -6,6 +6,6 @@ import build.MarkdownObject
 /**
  * A heading.
  */
-class Heading(mdo: MarkdownObject): Element(), Block {
+class Heading(mdo: MarkdownObject): ElementBase(), Block {
     val level = mdo.type.name.last().digitToInt()
 }

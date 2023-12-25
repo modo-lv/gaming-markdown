@@ -1,6 +1,7 @@
 package build
 
 import elements.*
+import elements.types.Element
 import org.intellij.markdown.MarkdownElementTypes.ATX_1
 import org.intellij.markdown.MarkdownElementTypes.ATX_2
 import org.intellij.markdown.MarkdownElementTypes.ATX_3

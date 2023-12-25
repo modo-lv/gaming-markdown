@@ -1,7 +1,7 @@
 package build.workers.types
 
-import elements.Element
 import build.WorkContext
+import elements.types.Element
 
 /**
  * Common interface for all second-pass processing workers.

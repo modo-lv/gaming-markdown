@@ -7,4 +7,4 @@ import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
  * Only exists during the first pass to match [ATX_CONTENT],
  * should be removed by the appropriate worker during second pass.
  */
-class Content : Element()
+class Content : ElementBase()
