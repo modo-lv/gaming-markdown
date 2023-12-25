@@ -2,7 +2,15 @@ package build
 
 import elements.*
 import org.intellij.markdown.MarkdownElementTypes.ATX_1
+import org.intellij.markdown.MarkdownElementTypes.ATX_2
+import org.intellij.markdown.MarkdownElementTypes.ATX_3
+import org.intellij.markdown.MarkdownElementTypes.ATX_4
+import org.intellij.markdown.MarkdownElementTypes.ATX_5
+import org.intellij.markdown.MarkdownElementTypes.ATX_6
+import org.intellij.markdown.MarkdownElementTypes.EMPH
 import org.intellij.markdown.MarkdownElementTypes.MARKDOWN_FILE
+import org.intellij.markdown.MarkdownElementTypes.PARAGRAPH
+import org.intellij.markdown.MarkdownElementTypes.STRONG
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_HEADER
 import org.intellij.markdown.MarkdownTokenTypes.Companion.TEXT
@@ -35,12 +43,15 @@ class FromMarkdown(
         val element =
             MarkdownObject(node, src).let {
                 when (it.type) {
-                    ATX_1 -> Heading(it)
+                    MARKDOWN_FILE -> Document()
+                    ATX_1, ATX_2, ATX_3, ATX_4, ATX_5, ATX_6 -> Heading(it)
+                    PARAGRAPH -> Paragraph()
+                    EMPH, STRONG -> Emphasis(it)
+                    TEXT, WHITE_SPACE -> Text(it)
+
                     ATX_CONTENT -> Content()
                     ATX_HEADER -> null
-                    MARKDOWN_FILE -> Document()
-                    TEXT -> Text(it)
-                    WHITE_SPACE -> Text(it)
+
                     else -> Placeholder(node.type)
                 }
             }

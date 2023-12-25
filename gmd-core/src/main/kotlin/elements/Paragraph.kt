@@ -1,0 +1,8 @@
+package elements
+
+import elements.types.Block
+
+/**
+ * A paragraph of text.
+ */
+class Paragraph : Element(), Block
