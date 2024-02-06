@@ -1,6 +1,7 @@
 package elements.types
 
 import kotlin.reflect.KClass
+import kotlin.reflect.full.isSubclassOf
 
 interface Element {
     /**
@@ -19,8 +20,8 @@ interface Element {
      */
     fun <T> findFirstSub(type: KClass<T>): T? where T : Element {
         @Suppress("UNCHECKED_CAST")
-        return subs.firstOrNull { it::class == type } as T?
-            ?: subs.map {  it.findFirstSub(type) }.firstOrNull()
+        return subs.firstOrNull { it::class.isSubclassOf(type) } as T?
+            ?: subs.map { it.findFirstSub(type) }.firstOrNull()
     }
 
     companion object {

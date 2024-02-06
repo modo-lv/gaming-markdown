@@ -15,6 +15,8 @@ class GmdBuild : Plugin<Project> {
         // Consistent JVM targeting
         project.tasks.withType(KotlinCompile::class.java) { it.kotlinOptions.jvmTarget = project.jvmTarget }
         project.tasks.withType(JavaCompile::class.java) { it.targetCompatibility = project.jvmTarget }
+        // Universal dependencies
+        project.dependencies.add("implementation", project.versionCatalog.findBundle("core").get())
         // Testing
         project.dependencies.addProvider("testImplementation", project.testFramework)
         project.dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher")
