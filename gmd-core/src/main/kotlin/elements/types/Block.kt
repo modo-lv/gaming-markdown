@@ -3,4 +3,6 @@ package elements.types
 /**
  * Indicates a block element.
  */
-interface Block : Element
+abstract class Block : Element() {
+    var explicitId: String? = null
+}

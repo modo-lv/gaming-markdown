@@ -9,6 +9,6 @@ import org.intellij.markdown.IElementType
  */
 class Placeholder(
     mdType: IElementType
-) : ElementBase(), Inline {
+) : Inline() {
     override val typeName: String = mdType.name
 }

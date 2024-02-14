@@ -5,4 +5,4 @@ import elements.types.Block
 /**
  * A paragraph of text.
  */
-class Paragraph : ElementBase(), Block
+class Paragraph : Block()

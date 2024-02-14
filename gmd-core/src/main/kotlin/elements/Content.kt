@@ -1,5 +1,6 @@
 package elements
 
+import elements.types.Element
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
 
 /**
@@ -7,4 +8,4 @@ import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
  * Only exists during the first pass to match [ATX_CONTENT],
  * should be removed by the appropriate worker during second pass.
  */
-class Content : ElementBase()
+class Content : Element()

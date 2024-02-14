@@ -4,16 +4,18 @@ import elements.Text
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
-interface Element {
+abstract class Element {
     /**
      * Element name.
      */
-    val typeName: String
+    open val typeName by lazy {
+        this::class.simpleName!!
+    }
 
     /**
      * Child elements contained by this element.
      */
-    var subs: List<Element>
+    var subs: List<Element> = emptyList()
 
     /**
      * Recursively find the first sub-element of a given type.

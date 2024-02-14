@@ -5,7 +5,7 @@ import elements.types.BlockContainer
 /**
  * The root element for a GM page, contains all other elements.
  */
-class Document : ElementBase(), BlockContainer {
+class Document : BlockContainer() {
     /**
      * Path to the file that this document come from, relative to the project's content dir.
      */
