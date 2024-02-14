@@ -11,7 +11,7 @@ import elements.types.Element
 class HeadingWorker : Worker() {
     init {
         mustRunAfter(
-            UnwrapContentWorker::class
+            ElementPropertiesWorker::class
         )
     }
 
