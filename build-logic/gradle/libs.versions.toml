@@ -10,6 +10,9 @@ gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 kt-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "5.1.0" }
 kt-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 
+# Setting parsing
+config = { module = "com.typesafe:config", version = "1.4.3" }
+
 # CLI argument lib
 cli-args = { module = "com.github.ajalt.clikt:clikt", version = "4.2.1" }
 
@@ -28,5 +31,5 @@ junit = { module = "org.junit.jupiter:junit-jupiter", version = "5.9.2" }
 kluent = { module = "org.amshove.kluent:kluent", version = "1.73" }
 
 [bundles]
-core = ["kt-logging", "kt-reflect"]
+core = ["kt-logging", "kt-reflect", "config"]
 core-test = ["junit", "kluent", "test-logging"]
