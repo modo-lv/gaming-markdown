@@ -27,7 +27,7 @@ open class Builder(workers: Set<Worker>) {
      */
     protected fun arrangeWorkers(workers: Set<Worker>): List<Worker> {
         val list = mutableListOf<Worker>()
-        val instances = workers.associateBy { it::class }
+        val instances = workers.associateBy { it::class }.toMutableMap()
 
         fun putOnList(worker: Worker, parents: Set<Worker> = emptySet()) {
             if (parents.contains(worker)) {
@@ -35,7 +35,12 @@ open class Builder(workers: Set<Worker>) {
                 throw WorkerCircularDependencyException("Circular dependency between $worker and $parent.")
             }
 
-            worker.runAfter.forEach { putOnList(instances[it]!!, parents.plus(worker)) }
+            worker.runAfter.forEach {
+                putOnList(
+                    worker = instances.getOrPut(it) { it.createInstance() },
+                    parents = parents.plus(worker)
+                )
+            }
             if (!list.contains(worker))
                 list.add(worker)
         }
