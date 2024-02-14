@@ -1,18 +1,35 @@
 package build.workers.types
 
-import build.WorkContext
+import build.BuildContext
 import elements.types.Element
+import kotlin.reflect.KClass
+
+typealias WorkerClass = KClass<out Worker>
+class WorkerCircularDependencyException(message: String) : Exception(message)
 
 /**
- * Common interface for all second-pass processing workers.
+ * Common interface for all conversion workers.
  *
  * Workers process [Element] trees created in the first pass and modify them to enable full GMD functionality.
  */
-interface Worker {
+abstract class Worker {
     /**
-     * See [WorkContext].
+     * See [BuildContext].
      */
-    val context: WorkContext
+    lateinit var context: BuildContext
+
+    /**
+     * Other workers that must be run before this one.
+     */
+    var runAfter: Set<KClass<out Worker>> = emptySet()
+        protected set
+
+    /**
+     * Convenience method for setting [runAfter].
+     */
+    fun mustRunAfter(vararg workers: KClass<out Worker>) {
+        runAfter = workers.toSet()
+    }
 
     /**
      * Recursively process an element and all its sub-elements, invoking [processElement] on each one.
@@ -25,5 +42,5 @@ interface Worker {
     /**
      * Process an element with this worker.
      */
-    fun processElement(element: Element): Element
+    abstract fun processElement(element: Element): Element
 }

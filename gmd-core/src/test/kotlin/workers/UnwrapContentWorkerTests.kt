@@ -1,14 +1,18 @@
 package workers
 
+import build.Builder
 import elements.Content
 import build.FromMarkdown
-import build.WorkContext
 import build.workers.UnwrapContentWorker
-import elements.types.Element.Companion.findFirstSub
+import elements.types.Element.Companion.firstSub
 import org.amshove.kluent.`should be`
 import org.junit.jupiter.api.Test
 
 class UnwrapContentWorkerTests {
+    private val builder = Builder.create(
+        UnwrapContentWorker::class
+    )
+
     @Test
     fun `Content elements get removed`() {
         val source =  """
@@ -17,9 +21,9 @@ class UnwrapContentWorkerTests {
         """.trimIndent()
 
         FromMarkdown(source).toDocument()
-            .let(UnwrapContentWorker(WorkContext())::processTree)
+            .let(builder::build)
             .apply {
-                findFirstSub<Content>() `should be` null
+                firstSub<Content>() `should be` null
             }
     }
 }

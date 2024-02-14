@@ -21,7 +21,7 @@ import org.intellij.markdown.flavours.commonmark.CommonMarkFlavourDescriptor
 import org.intellij.markdown.parser.MarkdownParser
 
 /**
- * Converts Markdown content into ours.
+ * Converts Markdown content into our element tree (first pass of the build process).
  * @param src Markdown content to process.
  */
 class FromMarkdown(
@@ -33,7 +33,7 @@ class FromMarkdown(
     private val root = MarkdownParser(CommonMarkFlavourDescriptor()).buildMarkdownTreeFromString(src)
 
     /**
-     * Parses the Markdown form `src` into our [Document].
+     * Parses the Markdown from `src` into our [Document].
      */
     fun toDocument(): Document = nodeToElement(root) as Document
 

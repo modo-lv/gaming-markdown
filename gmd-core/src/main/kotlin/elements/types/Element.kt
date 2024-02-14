@@ -19,10 +19,21 @@ interface Element {
      * Recursively find the first sub-element of a given type.
      * @param type Type (class) of element to find.
      */
-    fun <T> findFirstSub(type: KClass<T>): T? where T : Element {
+    fun <T> firstSub(type: KClass<T>): T? where T : Element =
+        firstSub(type) { true }
+
+    /**
+     * Recursively finds the first sub-element of the given type and matching `predicate`.
+     */
+    fun <T> firstSub(type: KClass<T>, predicate: (T) -> Boolean): T? where T : Element {
         @Suppress("UNCHECKED_CAST")
-        return subs.firstOrNull { it::class.isSubclassOf(type) } as T?
-            ?: subs.map { it.findFirstSub(type) }.firstOrNull()
+        return subs.firstOrNull { it::class.isSubclassOf(type) && predicate(it as T) } as T?
+            ?: subs.map { it.firstSub(type) }.firstOrNull()
+    }
+
+    fun <T> findDirectSubs(type: KClass<T>, predicate: (T) -> Boolean): List<T> where T : Element {
+        @Suppress("UNCHECKED_CAST")
+        return subs.filter { it::class.isSubclassOf(type) && predicate(it as T) }.map { it as T }
     }
 
     /**
@@ -37,7 +48,7 @@ interface Element {
                     .takeWhile { it is Inline }
                     .joinToString { makeTitle(it) }
 
-        return findFirstSub<Inline>()
+        return firstSub<Inline>()
             ?.let(::makeTitle)
             ?: ""
     }
@@ -47,7 +58,17 @@ interface Element {
          * Recursively find the first sub-element of a given type.
          * @param T Type of element to find.
          */
-        inline fun <reified T : Element> Element.findFirstSub(): T? =
-            findFirstSub(T::class)
+        inline fun <reified T : Element> Element.firstSub(): T? =
+            firstSub(T::class)
+
+        /**
+         * Recursively find the first sub-element of a given type.
+         * @param T Type of element to find.
+         */
+        inline fun <reified T : Element> Element.firstSub(noinline predicate: (T) -> Boolean): T? =
+            firstSub(T::class, predicate)
+
+        inline fun <reified T : Element> Element.findDirectSubs(noinline predicate: (T) -> Boolean): List<T> =
+            findDirectSubs(T::class, predicate)
     }
 }
