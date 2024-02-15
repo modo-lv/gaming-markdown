@@ -8,12 +8,14 @@ import org.intellij.markdown.MarkdownElementTypes.ATX_3
 import org.intellij.markdown.MarkdownElementTypes.ATX_4
 import org.intellij.markdown.MarkdownElementTypes.ATX_5
 import org.intellij.markdown.MarkdownElementTypes.ATX_6
+import org.intellij.markdown.MarkdownElementTypes.CODE_SPAN
 import org.intellij.markdown.MarkdownElementTypes.EMPH
 import org.intellij.markdown.MarkdownElementTypes.MARKDOWN_FILE
 import org.intellij.markdown.MarkdownElementTypes.PARAGRAPH
 import org.intellij.markdown.MarkdownElementTypes.STRONG
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_HEADER
+import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_LINE
 import org.intellij.markdown.MarkdownTokenTypes.Companion.TEXT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode
@@ -45,9 +47,11 @@ class FromMarkdown(
             MarkdownObject(node, src).let {
                 when (it.type) {
                     MARKDOWN_FILE -> Document()
+
                     ATX_1, ATX_2, ATX_3, ATX_4, ATX_5, ATX_6 -> Heading(it)
-                    PARAGRAPH -> Paragraph()
+                    CODE_SPAN -> CodeLine()
                     EMPH, STRONG -> Emphasis(it)
+                    PARAGRAPH -> Paragraph()
                     TEXT, WHITE_SPACE -> Text(it)
 
                     ATX_CONTENT -> Content()
