@@ -2,6 +2,7 @@ package project
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
+import com.typesafe.config.ConfigObject
 import com.typesafe.config.ConfigParseOptions
 import com.typesafe.config.ConfigSyntax
 import java.nio.file.Path
@@ -38,6 +39,17 @@ open class Project(rootPath: Path) {
             ).ifConfig("core") { it } ?: ConfigFactory.empty()
 
             conf.ifString("name") { newSettings.name = it }
+            if (conf.hasPath("labels")) {
+                newSettings.labels = conf.getObject("labels").map { label ->
+                    label.key to ProjectSettings.Label().apply {
+                        key = label.key
+                        (label.value as ConfigObject).also {
+                            name = it["name"]!!.unwrapped().toString()
+                            icon = it["icon"]?.unwrapped()?.toString()
+                        }
+                    }
+                }.toMap()
+            }
         }
         if (newSettings.name.isBlank())
             throw Exception("Project must have a name configured.")
