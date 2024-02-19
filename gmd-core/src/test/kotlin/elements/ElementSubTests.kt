@@ -1,12 +1,10 @@
 package elements
 
-import build.FromMarkdown
-import build.BuildContext
 import build.Builder
+import build.FromMarkdown
 import build.workers.UnwrapContentWorker
 import elements.types.Element.Companion.firstSub
 import org.amshove.kluent.`should be instance of`
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class ElementSubTests {

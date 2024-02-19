@@ -10,8 +10,10 @@ class GmdBuild : Plugin<Project> {
     override fun apply(project: Project) {
         project.group = "lv.modo.gaming.markdown"
         project.rootProject.repositories.mavenCentral()
+        project.rootProject.repositories.gradlePluginPortal()
         // Kotlin compilation
         project.pluginManager.apply(KotlinPluginWrapper::class.java)
+        project.pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
         // Consistent JVM targeting
         project.tasks.withType(KotlinCompile::class.java) { it.kotlinOptions.jvmTarget = project.jvmTarget }
         project.tasks.withType(JavaCompile::class.java) { it.targetCompatibility = project.jvmTarget }

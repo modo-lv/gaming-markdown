@@ -6,6 +6,7 @@ plugins {
 dependencies {
     // Plugins as regular dependencies allow access to their classes in our own plugins.
     implementation(libs.gradle.kotlin)
+    implementation(libs.kt.serial)
 }
 
 gradlePlugin {

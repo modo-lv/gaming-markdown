@@ -15,7 +15,6 @@ import org.intellij.markdown.MarkdownElementTypes.PARAGRAPH
 import org.intellij.markdown.MarkdownElementTypes.STRONG
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_HEADER
-import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_LINE
 import org.intellij.markdown.MarkdownTokenTypes.Companion.TEXT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode
