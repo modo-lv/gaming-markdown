@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation(libs.markdown)
+    implementation(libs.cli.args)
 
     testImplementation(libs.bundles.core.test)
 }
