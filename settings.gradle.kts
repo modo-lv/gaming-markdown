@@ -3,6 +3,7 @@ rootProject.name = "gaming-markdown"
 include(
     "gmd-core",
 
+    "gmd-text",
     "gmd-web",
 )
 

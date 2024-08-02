@@ -1,6 +1,6 @@
 # Labels
 
-Tags that categorize elements based and allow showing/hiding them based on user selection (at build time or interactively, depending on output).
+Tags that categorize elements and allow showing/hiding them based on user selection (at build time or interactively, depending on output).
 
 Syntax:
 
