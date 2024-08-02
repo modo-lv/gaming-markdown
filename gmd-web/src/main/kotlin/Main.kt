@@ -1,12 +1,14 @@
-
-import project.CoreClicktCommand
-import project.CoreProject
+import project.CliktCommandBase
+import project.CoreProjectComponent
 import project.WebProject
+import project.WebProjectComponent
 
-class GmdWeb : CoreClicktCommand() {
+class GmdWeb : CliktCommandBase() {
     override fun run() {
-        val core = CoreProject(projectPath)
-        val project = WebProject(core).initialize()
+        val project = WebProject(
+            core = CoreProjectComponent(projectPath),
+            web = WebProjectComponent(projectPath),
+        ).initialize()
     }
 }
 

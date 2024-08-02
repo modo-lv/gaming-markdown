@@ -3,4 +3,6 @@ package project
 import kotlinx.serialization.Serializable
 
 @Serializable
-class TextProjectSettings()
+class TextProjectSettings(
+    val pageWidth: Int = 30
+)

@@ -1,19 +1,16 @@
 package project
 
-import project.Project.Companion.loadConfig
 import java.nio.file.Path
 
-class CoreProject(rootPath: Path) : Project<CoreProjectSettings> {
-    override val rootPath: Path = rootPath.toAbsolutePath()
-
-    override lateinit var settings: CoreProjectSettings
-        private set
-
+class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreSettings>(
+    name = NAME,
+    rootPath = rootPath.toAbsolutePath(),
+) {
     /**
      * Initialize the project: load settings, perform basic sanity checks etc.
      */
-    fun initialize(): CoreProject {
-        settings = loadConfig<CoreProjectSettings>("core", defaultConfig)
+    override fun initialize() {
+        settings = loadSettings<CoreSettings>(name, defaultConfigPath)
             ?.takeIf { it.name.isNotBlank() }
             ?.also { settings ->
                 settings.labels.forEach {
@@ -21,6 +18,13 @@ class CoreProject(rootPath: Path) : Project<CoreProjectSettings> {
                 }
             }
             ?: throw Exception("Project must have a configuration file with at least [core.name] set.")
-        return this
+    }
+
+    override fun build() {
+        TODO("Not yet implemented")
+    }
+
+    companion object {
+        const val NAME = "core"
     }
 }

@@ -1,18 +1,18 @@
 package project
 
-import project.Project.Companion.loadConfig
-import java.nio.file.Path
-
-class WebProject(val core: CoreProject) : Project<WebProjectSettings> {
-    override val rootPath: Path = core.rootPath
-
-    override lateinit var settings: WebProjectSettings
-        private set
-
-    fun initialize(): WebProject {
+class WebProject(
+    val core: CoreProjectComponent,
+    val web: WebProjectComponent,
+) : Project<WebProject> {
+    override fun initialize(): WebProject {
         core.initialize()
-        settings = loadConfig("web", defaultConfig)
-            ?: WebProjectSettings()
+        web.initialize()
+        return this
+    }
+
+    override fun build(): WebProject {
+        core.build()
+        web.build()
         return this
     }
 }

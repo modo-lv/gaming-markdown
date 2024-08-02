@@ -1,12 +1,17 @@
 
-import project.CoreClicktCommand
-import project.CoreProject
+import project.CliktCommandBase
+import project.CoreProjectComponent
 import project.TextProject
+import project.TextProjectComponent
 
-class GmdText : CoreClicktCommand() {
+class GmdText : CliktCommandBase() {
     override fun run() {
-        val core = CoreProject(projectPath)
-        val project = TextProject(core).initialize()
+        val project = TextProject(
+            core = CoreProjectComponent(projectPath),
+            text = TextProjectComponent(projectPath),
+        )
+            .initialize()
+            .build()
     }
 }
 

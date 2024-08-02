@@ -7,7 +7,7 @@ import kotlinx.serialization.Transient
  * Project settings as loaded from config file(s).
  */
 @Serializable
-data class CoreProjectSettings(
+data class CoreSettings(
     val name: String,
     val dirs: CoreDirs = CoreDirs(),
     val labels: Map<String, CoreLabel> = emptyMap(),
