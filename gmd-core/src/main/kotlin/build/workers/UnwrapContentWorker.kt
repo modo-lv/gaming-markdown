@@ -1,7 +1,7 @@
 package build.workers
 
-import elements.Content
 import build.workers.types.Worker
+import elements.Content
 import elements.types.Element
 
 /**

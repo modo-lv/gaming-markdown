@@ -56,7 +56,11 @@ class FromMarkdown(
                     ATX_CONTENT -> Content()
                     ATX_HEADER -> null
 
-                    else -> Placeholder(node.type)
+                    else -> when (it.type.name) {
+                        ":" -> Text(it)
+                        "EOL" -> Eol()
+                        else -> Placeholder(node.type)
+                    }
                 }
             }
 
