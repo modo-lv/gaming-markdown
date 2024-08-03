@@ -20,7 +20,7 @@ class HeadingWorker : Worker() {
 
         // intellij-markdown parses leading/trailing whitespace as separate elements,
         // allowing easy removal
-        element.subs = element.subs.filterNot {
+        element.subs.removeIf {
             it is Text && it.content.isBlank()
         }
 

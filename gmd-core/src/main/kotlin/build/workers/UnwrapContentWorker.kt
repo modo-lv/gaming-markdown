@@ -16,7 +16,7 @@ class UnwrapContentWorker : Worker() {
                         el.subs
                     else
                         listOf(el)
-                }
+                }.toMutableList()
             }
         }
 

@@ -32,7 +32,9 @@ open class Builder(workers: Set<Worker>) {
         fun putOnList(worker: Worker, parents: Set<Worker> = emptySet()) {
             if (parents.contains(worker)) {
                 val parent = parents.first { it.runAfter.contains(worker::class) }
-                throw WorkerCircularDependencyException("Circular dependency between $worker and $parent.")
+                throw WorkerCircularDependencyException(
+                    "Circular dependency between ${worker::class.simpleName} and ${parent::class.simpleName}."
+                )
             }
 
             worker.runAfter.forEach {

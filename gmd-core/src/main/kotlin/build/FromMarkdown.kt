@@ -60,7 +60,7 @@ class FromMarkdown(
                 }
             }
 
-        element?.subs = node.children.mapNotNull(::nodeToElement)
+        element?.subs = node.children.mapNotNull(::nodeToElement).toMutableList()
 
         return element
     }

@@ -15,7 +15,7 @@ abstract class Element {
     /**
      * Child elements contained by this element.
      */
-    var subs: List<Element> = emptyList()
+    var subs: MutableList<Element> = mutableListOf()
 
     /**
      * Recursively find the first sub-element of a given type.

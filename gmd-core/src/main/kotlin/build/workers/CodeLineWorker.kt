@@ -18,7 +18,7 @@ class CodeLineWorker : Worker() {
 
         return element.apply {
             content = this.firstSub<Text>()!!.content
-            subs = emptyList()
+            subs.clear()
         }
     }
 }
