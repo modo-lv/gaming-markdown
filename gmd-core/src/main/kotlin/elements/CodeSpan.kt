@@ -2,6 +2,6 @@ package elements
 
 import elements.types.Inline
 
-class CodeLine : Inline() {
+class CodeSpan : Inline() {
     lateinit var content: String
 }

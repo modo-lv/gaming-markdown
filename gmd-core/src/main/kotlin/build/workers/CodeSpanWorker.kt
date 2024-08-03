@@ -1,20 +1,23 @@
 package build.workers
 
 import build.workers.types.Worker
-import elements.CodeLine
+import elements.CodeSpan
 import elements.Text
 import elements.types.Element
 import elements.types.Element.Companion.firstSub
 
-class CodeLineWorker : Worker() {
+/**
+ * Flattens code span's text sub-element into its content.
+ */
+class CodeSpanWorker : Worker() {
     init {
         mustRunAfter(
-            UnwrapContentWorker::class
+            TextCoalesceWorker::class
         )
     }
 
     override fun processElement(element: Element): Element {
-        if (element !is CodeLine) return element
+        if (element !is CodeSpan) return element
 
         return element.apply {
             content = this.firstSub<Text>()!!.content

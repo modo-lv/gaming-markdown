@@ -48,7 +48,7 @@ class FromMarkdown(
                     MARKDOWN_FILE -> Document()
 
                     ATX_1, ATX_2, ATX_3, ATX_4, ATX_5, ATX_6 -> Heading(it)
-                    CODE_SPAN -> CodeLine()
+                    CODE_SPAN -> CodeSpan()
                     EMPH, STRONG -> Emphasis(it)
                     PARAGRAPH -> Paragraph()
                     TEXT, WHITE_SPACE -> Text(it)
