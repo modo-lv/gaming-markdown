@@ -24,7 +24,7 @@ fs = { module = "com.squareup.okio:okio", version = "3.7.0" }
 # Markdown parsing
 markdown = { module = "com.vladsch.flexmark:flexmark-all", version = "0.64.8" }
 
-# Web
+# Templates
 kte = { module = "gg.jte:jte-kotlin", version = "3.1.6" }
 
 # Testing
