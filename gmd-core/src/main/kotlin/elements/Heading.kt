@@ -1,11 +1,11 @@
 package elements
 
+import build.MdHeading
 import elements.types.Block
-import build.MarkdownObject
 
 /**
  * A heading.
  */
-class Heading(mdo: MarkdownObject): Block() {
-    val level = mdo.type.name.last().digitToInt()
+class Heading(heading: MdHeading): Block() {
+    val level = heading.level
 }

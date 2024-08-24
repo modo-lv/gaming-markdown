@@ -2,17 +2,12 @@ package elements
 
 import build.Builder
 import build.FromMarkdown
-import build.workers.HeadingWorker
-import build.workers.UnwrapContentWorker
 import elements.types.Element.Companion.firstSub
 import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.Test
 
 class ElementTitleTests {
-    private val builder = Builder.create(
-        UnwrapContentWorker::class,
-        HeadingWorker::class
-    )
+    private val builder = Builder.create()
 
     @Test
     fun `Heading title gets extracted correctly`() {

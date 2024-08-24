@@ -1,5 +1,6 @@
 package elements.types
 
+import com.vladsch.flexmark.ext.attributes.AttributeNode
 import elements.Text
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
@@ -11,6 +12,10 @@ abstract class Element {
     open val typeName by lazy {
         this::class.simpleName!!
     }
+
+    var explicitId: String? = null
+
+    var attributes: List<AttributeNode>? = null
 
     /**
      * Child elements contained by this element.

@@ -2,14 +2,14 @@ package elements
 
 import build.Builder
 import build.FromMarkdown
-import build.workers.HeadingWorker
+import build.workers.ExplicitIdWorker
 import elements.types.Element.Companion.firstSub
 import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.Test
 
 class ExplicitIdTests {
     private val builder = Builder.create(
-        HeadingWorker::class
+        ExplicitIdWorker::class
     )
 
     @Test
