@@ -3,9 +3,13 @@ package project
 import gg.jte.ContentType
 import gg.jte.TemplateEngine
 import gg.jte.output.StringOutput
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jte.GmdTemplateResolver
 import java.nio.file.Path
+import kotlin.io.path.absolute
 import kotlin.io.path.writeText
+
+private val logger = KotlinLogging.logger {  }
 
 class TextProject(
     val core: CoreProjectComponent,
@@ -32,8 +36,9 @@ class TextProject(
             setTrimControlStructures(true)
         }
         val output = StringOutput()
+        logger.info { "Generating text output and saving to [${outputFile.absolute()}]..." }
         engine.render("project.kte", this, output)
-        outputFile.writeText(output.toString())
+        outputFile.absolute().writeText(output.toString())
         return this
     }
 

@@ -7,7 +7,9 @@ jvm = "21"
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 # Kotlin
-kt-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "5.1.0" }
+kt-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.0" }
+slf4j = { module = "org.slf4j:slf4j-api", version = "2.0.16" }
+logback = { module = "ch.qos.logback:logback-classic", version = "1.5.7" }
 kt-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kt-serial = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 
@@ -33,5 +35,13 @@ junit = { module = "org.junit.jupiter:junit-jupiter", version = "5.9.2" }
 kluent = { module = "org.amshove.kluent:kluent", version = "1.73" }
 
 [bundles]
-core = ["kt-logging", "kt-reflect", "config", "hocon"]
+core = [
+    "kt-logging",
+    "kt-reflect", "config", "hocon"
+]
+# Additional dependencies for runnable apps
+full = [
+    "slf4j", "logback",
+    "cli-args"
+]
 core-test = ["junit", "kluent", "test-logging"]

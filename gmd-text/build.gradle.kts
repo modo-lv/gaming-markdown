@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.cli.args)
+    implementation(libs.bundles.full)
     implementation(libs.kte)
     implementation(project(":gmd-core"))
 
