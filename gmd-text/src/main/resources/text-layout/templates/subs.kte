@@ -1,0 +1,24 @@
+@import elements.Heading
+@import elements.Link
+@import elements.Paragraph
+@import elements.Placeholder
+@import elements.Text
+@import elements.types.Element
+@param element: Element
+@for (a in 0 until element.subs.size)
+    !{val sub = element.subs[a]}
+    !{val next = element.subs.getOrNull(a + 1)}
+    @if (sub is Heading)
+        @template.heading(sub)
+    @elseif (sub is Paragraph)
+        @template.paragraph(sub, next)
+    @elseif (sub is Link)
+        @template.link(sub)
+    @elseif (sub is Text)
+        @template.text(sub)
+    @elseif (sub is Placeholder)
+        @template.placeholder(sub)
+    @else
+        @template.subs(sub)
+    @endif
+@endfor

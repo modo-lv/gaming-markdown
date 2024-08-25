@@ -1,0 +1,9 @@
+@import elements.types.Element
+@import elements.Paragraph
+@param paragraph: Paragraph
+@param next: Element?
+
+@template.subs(paragraph)
+@if (next != null && next !is Paragraph)
+
+@endif

@@ -1,0 +1,4 @@
+@import elements.Heading
+@param heading: Heading
+
+@template.subs(heading)

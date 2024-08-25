@@ -1,0 +1,5 @@
+@import elements.Document
+@import project.TextProject
+@for (page in TextProject.Current.pages)
+    @template.subs(page.document)
+@endfor

@@ -1,0 +1,7 @@
+@import elements.Link
+@param link: Link
+@if (link.isAnchor)
+    [${link.target}] @template.subs(link)
+@else
+    @template.subs(link) [${link.target}]
+@endif

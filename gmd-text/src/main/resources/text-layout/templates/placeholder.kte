@@ -1,0 +1,3 @@
+@import elements.types.Element
+@param element: Element
+<${element.typeName}>
