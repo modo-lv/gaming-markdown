@@ -1,4 +1,3 @@
-
 import project.CliktCommandBase
 import project.CoreProjectComponent
 import project.TextProject
