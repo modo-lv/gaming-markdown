@@ -8,7 +8,8 @@ import kotlinx.serialization.Transient
  */
 @Serializable
 data class CoreSettings(
-    val name: String,
+    val title: String? = null,
+    val name: String? = null,
     val dirs: CoreDirs = CoreDirs(),
     val labels: Map<String, CoreLabel> = emptyMap(),
 ) {

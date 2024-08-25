@@ -11,9 +11,11 @@ import java.nio.file.Path
 
 /**
  * Base class for different project types.
+ *
+ * @param componentType Component type name, used to determine configuration prefix and similar things.
  */
 abstract class ProjectComponent<TSettings: Any>(
-    val name: String,
+    val componentType: String,
     rootPath: Path,
 ) {
     val rootPath: Path = rootPath.toAbsolutePath()
@@ -21,7 +23,7 @@ abstract class ProjectComponent<TSettings: Any>(
     lateinit var settings: TSettings
         protected set
 
-    val configPath: String = name
+    val configPath: String = componentType
 
     val defaultConfigPath: Path =
         rootPath.resolve(Path.of("gmd.conf"))

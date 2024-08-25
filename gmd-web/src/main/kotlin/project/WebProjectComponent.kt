@@ -3,11 +3,11 @@ package project
 import java.nio.file.Path
 
 class WebProjectComponent(rootPath: Path) : ProjectComponent<WebProjectSettings>(
-    name = NAME,
+    componentType = NAME,
     rootPath = rootPath,
 ) {
     override fun initialize() {
-        settings = loadSettings(name, defaultConfigPath) ?: WebProjectSettings()
+        settings = loadSettings(componentType, defaultConfigPath) ?: WebProjectSettings()
     }
 
     companion object {

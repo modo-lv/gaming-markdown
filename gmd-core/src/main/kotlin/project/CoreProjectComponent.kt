@@ -4,15 +4,19 @@ import build.Builder
 import build.FromMarkdown
 import build.workers.ExplicitIdWorker
 import java.nio.file.Path
-import kotlin.io.path.PathWalkOption
-import kotlin.io.path.pathString
-import kotlin.io.path.readText
-import kotlin.io.path.walk
+import kotlin.io.path.*
 
 class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreSettings>(
-    name = NAME,
+    componentType = COMPONENT_TYPE,
     rootPath = rootPath.toAbsolutePath(),
 ) {
+    /**
+     * Short name of the project.
+     *
+     * Can be set explicitly in config, otherwise inferred from the name of the directory the project is in.
+     */
+    var name: String = rootPath.fileName.nameWithoutExtension
+
     /**
      * All pages in the project, parsed in alphabetical order (by full path, including subfolders).
      *
@@ -39,17 +43,17 @@ class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreSettings>(
      * Initialize the project: load settings, perform basic sanity checks etc.
      */
     override fun initialize() {
-        settings = loadSettings<CoreSettings>(name, defaultConfigPath)
-            ?.takeIf { it.name.isNotBlank() }
+        settings = loadSettings<CoreSettings>(componentType, defaultConfigPath)
             ?.also { settings ->
+                settings.name?.also { this.name = it }
                 settings.labels.forEach {
                     it.value.key = it.key
                 }
             }
-            ?: throw Exception("Project must have a configuration file with at least [core.name] set.")
+            ?: CoreSettings()
     }
 
     companion object {
-        const val NAME = "core"
+        const val COMPONENT_TYPE = "core"
     }
 }

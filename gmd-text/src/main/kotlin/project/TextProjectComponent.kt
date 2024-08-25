@@ -3,11 +3,11 @@ package project
 import java.nio.file.Path
 
 class TextProjectComponent(rootPath: Path) : ProjectComponent<TextProjectSettings>(
-    name = NAME,
+    componentType = NAME,
     rootPath = rootPath.toAbsolutePath(),
 ) {
     override fun initialize() {
-        settings = loadSettings(name, defaultConfigPath) ?: TextProjectSettings()
+        settings = loadSettings(componentType, defaultConfigPath) ?: TextProjectSettings()
     }
 
     companion object {
