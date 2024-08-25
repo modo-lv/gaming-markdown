@@ -38,8 +38,9 @@ class FromMarkdown(
             is MdCode -> CodeSpan()
             is MdDocument -> Document()
             is MdHeading -> Heading(node)
+            is MdLink -> Link(target = "${node.url}")
             is MdParagraph -> Paragraph()
-            is MdText -> Text("${node.chars}")
+            is MdText -> Text(content = "${node.chars}")
 
             is AttributesNode -> null
             is SoftLineBreak -> null
