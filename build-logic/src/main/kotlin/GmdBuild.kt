@@ -1,9 +1,11 @@
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class GmdBuild : Plugin<Project> {
@@ -19,6 +21,10 @@ class GmdBuild : Plugin<Project> {
         project.tasks.withType(JavaCompile::class.java) { it.targetCompatibility = project.jvmTarget }
         // Universal dependencies
         project.dependencies.add("implementation", project.versionCatalog.findBundle("core").get())
+        // Use `Path.walk` in all projects
+        project.tasks.withType(KotlinCompilationTask::class.java) {
+            it.compilerOptions.freeCompilerArgs.add("-opt-in=kotlin.io.path.ExperimentalPathApi")
+        }
         // Testing
         project.dependencies.addProvider("testImplementation", project.testFramework)
         project.dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher")

@@ -28,8 +28,6 @@ abstract class ProjectComponent<TSettings: Any>(
 
     abstract fun initialize()
 
-    abstract fun build()
-
 
     fun mergeConfig(vararg configFiles: String): Config =
         mergeConfig(

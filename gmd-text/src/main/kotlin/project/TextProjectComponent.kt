@@ -10,10 +10,6 @@ class TextProjectComponent(rootPath: Path) : ProjectComponent<TextProjectSetting
         settings = loadSettings(name, defaultConfigPath) ?: TextProjectSettings()
     }
 
-    override fun build() {
-        TODO("Not yet implemented")
-    }
-
     companion object {
         const val NAME = "text"
     }

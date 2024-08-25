@@ -5,7 +5,7 @@ import project.WebProjectComponent
 
 class GmdWeb : CliktCommandBase() {
     override fun run() {
-        val project = WebProject(
+        WebProject(
             core = CoreProjectComponent(projectPath),
             web = WebProjectComponent(projectPath),
         ).initialize()

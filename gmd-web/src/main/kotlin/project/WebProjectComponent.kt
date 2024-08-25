@@ -10,10 +10,6 @@ class WebProjectComponent(rootPath: Path) : ProjectComponent<WebProjectSettings>
         settings = loadSettings(name, defaultConfigPath) ?: WebProjectSettings()
     }
 
-    override fun build() {
-        TODO("Not yet implemented")
-    }
-
     companion object {
         const val NAME = "web"
     }
