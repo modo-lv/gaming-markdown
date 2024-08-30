@@ -3,6 +3,8 @@ package build
 import com.vladsch.flexmark.ast.*
 import com.vladsch.flexmark.util.ast.Document
 
+typealias MdBulletList = BulletList
+typealias MdBulletListItem = BulletListItem
 typealias MdCode = Code
 typealias MdDocument = Document
 typealias MdHeading = Heading

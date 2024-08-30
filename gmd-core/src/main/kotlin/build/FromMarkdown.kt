@@ -8,6 +8,7 @@ import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.ast.Node
 import com.vladsch.flexmark.util.data.MutableDataSet
 import elements.*
+import elements.List
 import elements.types.Element
 
 /**
@@ -35,6 +36,8 @@ class FromMarkdown(
      */
     fun nodeToElement(node: Node): Element? {
         val element = when (node) {
+            is MdBulletList -> List(ordered = false)
+            is MdBulletListItem -> ListItem()
             is MdCode -> CodeSpan()
             is MdDocument -> Document()
             is MdHeading -> Heading(node)
