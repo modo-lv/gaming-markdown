@@ -11,26 +11,23 @@ import kotlin.io.path.writeText
 
 private val logger = KotlinLogging.logger {  }
 
-class TextProject(
-    val core: CoreProjectComponent,
-    val text: TextProjectComponent,
-) : Project<TextProject> {
-    override val pages get() = core.pages
-
+class TextProject(rootFilePath: Path) : CoreProject(rootFilePath = rootFilePath) {
     lateinit var outputFile: Path
 
-    override fun initialize(): TextProject {
-        core.initialize()
-        text.initialize()
-        return this.apply {
-            outputFile = text.rootPath
-                .resolve(text.settings.outputDir)
-                .resolve(text.settings.outputFile.replace("{name}", core.name))
+    lateinit var textSettings: TextProjectSettings
+
+    override fun initialize() {
+        super.initialize()
+        textSettings = loadSettings("text", configFilePath) ?: TextProjectSettings()
+        this.apply {
+            outputFile = rootFilePath
+                .resolve(textSettings.outputDir)
+                .resolve(textSettings.outputFile.replace("{name}", projectName))
             Current = this
         }
     }
 
-    override fun build(): TextProject {
+    fun build(): TextProject {
         val resolver = GmdTemplateResolver("text-layout/templates")
         val engine = TemplateEngine.create(resolver, ContentType.Plain).apply {
             setTrimControlStructures(true)

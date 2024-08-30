@@ -7,23 +7,21 @@ import kotlinx.serialization.Transient
  * Project settings as loaded from config file(s).
  */
 @Serializable
-data class CoreProjectSettings(
-    val title: String? = null,
-    val name: String? = null,
-    val dirs: CoreDirs = CoreDirs(),
-    val labels: Map<String, CoreLabel> = emptyMap(),
-) {
+open class CoreProjectSettings {
+    var name: String? = null
+    var title: String? = null
+    var dirs: CoreDirs = CoreDirs()
+    var labels: Map<String, CoreLabel> = emptyMap()
 
     @Serializable
-    data class CoreDirs(
-        val pages: String = "pages"
+    class CoreDirs(
+        var pages: String = "pages"
     )
 
     @Serializable
-    data class CoreLabel(
-        val name: String,
-        val icon: String? = null,
-    ) {
+    class CoreLabel(val name: String) {
+        val icon: String? = null
+
         @Transient
         lateinit var key: String
     }

@@ -1,18 +1,11 @@
 package project
 
-class WebProject(
-    val core: CoreProjectComponent,
-    val web: WebProjectComponent,
-) : Project<WebProject> {
-    override val pages get() = core.pages
+import java.nio.file.Path
 
-    override fun initialize(): WebProject {
-        core.initialize()
-        web.initialize()
-        return this
-    }
+class WebProject(rootFilePath: Path) : CoreProject(rootFilePath = rootFilePath) {
+    lateinit var webSettings: WebProjectSettings
 
-    override fun build(): WebProject {
-        return this
+    override fun initialize() {
+        webSettings = loadSettings("web", configFilePath) ?: WebProjectSettings()
     }
 }

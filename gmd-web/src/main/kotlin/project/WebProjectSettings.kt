@@ -3,4 +3,4 @@ package project
 import kotlinx.serialization.Serializable
 
 @Serializable
-class WebProjectSettings()
+class WebProjectSettings : CoreProjectSettings()
