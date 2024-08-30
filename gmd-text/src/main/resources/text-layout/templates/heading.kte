@@ -1,4 +1,19 @@
+@import elements.types.Element
 @import elements.Heading
+@import project.TextProject
 @param heading: Heading
-
+@param next: Element?
+!{
+     val line = when (heading.level) {
+         1 -> "#"
+         2 -> "="
+         3 -> "-"
+         else -> ""
+     }
+}
+${line.repeat(TextProject.Current.textSettings.pageWidth)}
 @template.subs(heading)
+@if (next !is Heading || next.level != heading.level)
+    ${line.repeat(TextProject.Current.textSettings.pageWidth)}
+
+@endif
