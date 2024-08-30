@@ -1,5 +1,6 @@
 plugins {
     id("gmd-build")
+    `java-test-fixtures`
 }
 
 dependencies {

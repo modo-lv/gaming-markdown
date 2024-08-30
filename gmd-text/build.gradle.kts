@@ -1,5 +1,6 @@
 plugins {
     id("gmd-build")
+    `java-test-fixtures`
 }
 
 dependencies {
@@ -7,5 +8,6 @@ dependencies {
     implementation(libs.kte)
     implementation(project(":gmd-core"))
 
+    testImplementation(testFixtures(project(":gmd-core")))
     testImplementation(libs.bundles.core.test)
 }

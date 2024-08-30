@@ -10,6 +10,7 @@ import com.typesafe.config.ConfigSyntax
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.hocon.Hocon
 import kotlinx.serialization.hocon.decodeFromConfig
+import java.nio.file.FileSystem
 import java.nio.file.Path
 import kotlin.io.path.*
 
@@ -19,18 +20,23 @@ import kotlin.io.path.*
  * More specialized projects inherit from this and add their own functionality on top.
  */
 open class CoreProject(rootFilePath: Path) {
-    val rootFilePath = rootFilePath.absolute()
+    val rootFilePath: Path = rootFilePath.absolute().normalize()
+
+    val fs: FileSystem = this.rootFilePath.fileSystem
 
     lateinit var coreSettings: CoreProjectSettings
 
-    var configFilePath: Path = rootFilePath.resolve(Path.of("gmd.conf"))
+    var configFilePath: Path = this.rootFilePath.resolve(fs.getPath("gmd.conf"))
 
     /**
      * Short name of the project.
      *
      * Can be set explicitly in config, otherwise inferred from the name of the directory the project is in.
      */
-    var projectName: String = rootFilePath.fileName.nameWithoutExtension
+    var name: String = this.rootFilePath.fileName.nameWithoutExtension
+
+    fun pathTo(path: String): Path = rootFilePath.resolve(path)
+    fun pathTo(path: Path): Path = rootFilePath.resolve(path)
 
     /**
      * All pages in the project, parsed in alphabetical order (by full path, including subfolders).
@@ -61,7 +67,7 @@ open class CoreProject(rootFilePath: Path) {
         coreSettings =
             loadSettings<CoreProjectSettings>("core", configFilePath)
                 ?.also { settings ->
-                    settings.name?.also { this.projectName = it }
+                    settings.name?.also { this.name = it }
                     settings.labels.forEach {
                         it.value.key = it.key
                     }
@@ -84,9 +90,12 @@ open class CoreProject(rootFilePath: Path) {
         fun mergeConfig(vararg configFiles: Path): Config =
             configFiles
                 .foldRight(ConfigFactory.empty()) { configPath, config ->
+                    if (!configPath.exists())
+                        return@foldRight config
                     config.withFallback(
-                        ConfigFactory.parseFile(
-                            configPath.toFile(),
+                        // Can't use `parseFile` because it required `File`, which isn't supported by Jimfs
+                        ConfigFactory.parseString(
+                            configPath.readText(),
                             ConfigParseOptions.defaults().setAllowMissing(true).setSyntax(ConfigSyntax.CONF)
                         )
                     )
