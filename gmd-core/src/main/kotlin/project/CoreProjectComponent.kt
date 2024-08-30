@@ -6,7 +6,7 @@ import build.workers.ExplicitIdWorker
 import java.nio.file.Path
 import kotlin.io.path.*
 
-class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreSettings>(
+class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreProjectSettings>(
     componentType = COMPONENT_TYPE,
     rootPath = rootPath.toAbsolutePath(),
 ) {
@@ -43,14 +43,14 @@ class CoreProjectComponent(rootPath: Path) : ProjectComponent<CoreSettings>(
      * Initialize the project: load settings, perform basic sanity checks etc.
      */
     override fun initialize() {
-        settings = loadSettings<CoreSettings>(componentType, defaultConfigPath)
+        settings = loadSettings<CoreProjectSettings>(componentType, defaultConfigPath)
             ?.also { settings ->
                 settings.name?.also { this.name = it }
                 settings.labels.forEach {
                     it.value.key = it.key
                 }
             }
-            ?: CoreSettings()
+            ?: CoreProjectSettings()
     }
 
     companion object {
