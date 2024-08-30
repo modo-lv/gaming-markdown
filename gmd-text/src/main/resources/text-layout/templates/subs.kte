@@ -1,3 +1,4 @@
+@import elements.types.Block
 @import elements.Heading
 @import elements.Link
 @import elements.Paragraph
@@ -9,7 +10,7 @@
     !{val sub = element.subs[a]}
     !{val next = element.subs.getOrNull(a + 1)}
     @if (sub is Heading)
-        @template.heading(sub)
+        @template.heading(sub, next)
     @elseif (sub is Paragraph)
         @template.paragraph(sub, next)
     @elseif (sub is Link)
@@ -21,4 +22,5 @@
     @else
         @template.subs(sub)
     @endif
+    @if (sub is Block && next != null)${System.lineSeparator()}@endif
 @endfor
