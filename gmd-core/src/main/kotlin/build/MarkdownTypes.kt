@@ -9,3 +9,4 @@ typealias MdHeading = Heading
 typealias MdLink = Link
 typealias MdParagraph = Paragraph
 typealias MdText = Text
+typealias MdThematicBreak = ThematicBreak

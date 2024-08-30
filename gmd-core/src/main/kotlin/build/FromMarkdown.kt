@@ -41,6 +41,7 @@ class FromMarkdown(
             is MdLink -> Link(target = "${node.url}")
             is MdParagraph -> Paragraph()
             is MdText -> Text(content = "${node.chars}")
+            is MdThematicBreak -> ThematicBreak()
 
             is AttributesNode -> null
             is SoftLineBreak -> null

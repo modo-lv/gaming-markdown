@@ -1,0 +1,7 @@
+@import elements.types.*
+@import elements.ThematicBreak
+@import project.TextProject
+@param hr: ThematicBreak
+@param next: Element?
+${"*".repeat(TextProject.Current.textSettings.pageWidth)}
+@template.utils.block-end(next)
