@@ -1,7 +1,9 @@
 @import elements.Link
 @param link: Link
-@if (link.isAnchor)
+@if (link.isBroken)
+    ${"["}@template.subs(link)${"]"}
+@elseif (link.isInternal)
     [${link.target}] @template.subs(link)
 @else
-    @template.subs(link) [${link.target}]
+    @template.subs(link) (${link.target})
 @endif
