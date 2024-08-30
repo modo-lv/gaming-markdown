@@ -39,6 +39,7 @@ class FromMarkdown(
             is MdDocument -> Document()
             is MdHeading -> Heading(node)
             is MdLink -> Link(target = "${node.url}")
+            is MdLinkRef -> Link(target = "")
             is MdParagraph -> Paragraph()
             is MdText -> Text(content = "${node.chars}")
             is MdThematicBreak -> ThematicBreak()
