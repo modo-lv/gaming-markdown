@@ -9,8 +9,8 @@ class GmdTemplateResolver(root: String) : CodeResolver {
     override fun resolve(name: String): String {
         val result = resourceResolver.resolve(name)
             // Ensure that included elements don't add unintended newlines
-            .replace("""(?:\r\n?|\n)[ \t]+(@template.+)\s*""".toRegex(), "$1")
-            .replace("""(@end\w+)\s+""".toRegex(), "$1")
+            .replace("""([@!$](?!import|param).*|\r\n?|\n)\s*""".toRegex(), "$1")
+            .replace("""}\s+""".toRegex(), "}")
         return result
     }
 

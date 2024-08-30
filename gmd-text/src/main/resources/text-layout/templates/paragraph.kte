@@ -4,6 +4,4 @@
 @param next: Element?
 
 @template.subs(paragraph)
-@if (next != null && next !is Paragraph)
-
-@endif
+@template.utils.block-end(next)

@@ -1,0 +1,5 @@
+@import elements.types.*
+@param next: Element?
+@if (next != null)
+${System.lineSeparator()}
+@endif

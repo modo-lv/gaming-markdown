@@ -21,7 +21,9 @@ abstract class TextProjectTest {
 
         fun TextProject.buildOutput(): String =
             build().run {
-                pathTo("text-out/${name}.txt").readText()
+                pathTo("text-out/${name}.txt")
+                    .readText()
+                    .trimIndent() // Since we frequently use trimIndent on expected strings
             }
 
         @JvmStatic

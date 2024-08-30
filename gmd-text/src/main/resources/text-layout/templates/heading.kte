@@ -12,8 +12,10 @@
      }
 }
 ${line.repeat(TextProject.Current.textSettings.pageWidth)}
+${System.lineSeparator()}
 @template.subs(heading)
+${System.lineSeparator()}
 @if (next !is Heading || next.level != heading.level)
     ${line.repeat(TextProject.Current.textSettings.pageWidth)}
-
+    @template.utils.block-end(next)
 @endif
