@@ -41,23 +41,36 @@ open class CoreProject(rootFilePath: Path) {
     /**
      * All pages in the project, parsed in alphabetical order (by full path, including subfolders).
      *
-     * Runs the parsing on first access.
+     * Must be filled by calling [parsedPages].
      */
-    val pages: List<Page> by lazy {
-        val builder = Builder.create(
-            ExplicitIdWorker::class
-        )
-        val dir = rootFilePath.resolve(coreSettings.dirs.pages)
-        dir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
-            .sortedBy { it.pathString }
-            .filter { it.pathString.endsWith(".md") }
-            .map { file ->
-                Page(
-                    filePath = file,
-                    document = FromMarkdown(file.readText()).toDocument().let(builder::build)
-                )
-            }
-            .toList()
+    private var pages: List<Page>? = null
+
+    /**
+     * Returns the list of [Page]s for this project, in alphabetical order (by full path, including subfolders).
+     *
+     * If the list has not been populated yet, will run the parsing process and populate it.
+     * It can be an empty list if the project has no page files.
+     *
+     * @param recreate Rerun the parsing even if a page list already exists?
+     */
+    fun parsedPages(recreate: Boolean = false): List<Page> {
+        if (recreate || pages == null) {
+            val builder = Builder.create(
+                ExplicitIdWorker::class
+            )
+            val dir = rootFilePath.resolve(coreSettings.dirs.pages)
+            pages = dir.walk(PathWalkOption.INCLUDE_DIRECTORIES)
+                .sortedBy { it.pathString }
+                .filter { it.pathString.endsWith(".md") }
+                .map { file ->
+                    Page(
+                        filePath = file,
+                        document = FromMarkdown(file.readText()).toDocument().let(builder::build)
+                    )
+                }
+                .toList()
+        }
+        return pages!!
     }
 
     /**

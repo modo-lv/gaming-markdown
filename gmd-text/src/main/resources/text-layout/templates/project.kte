@@ -1,5 +1,5 @@
 @import elements.Document
 @import project.TextProject
-@for (page in TextProject.Current.pages)
+@for (page in TextProject.Current.parsedPages())
     @template.subs(page.document)
 @endfor
