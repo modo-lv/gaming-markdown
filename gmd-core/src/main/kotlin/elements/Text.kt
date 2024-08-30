@@ -5,6 +5,4 @@ import elements.types.Inline
 /**
  * Basic plain text.
  */
-class Text(val content: String) : Inline() {
-
-}
+class Text(val content: String) : Inline()
