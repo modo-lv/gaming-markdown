@@ -10,6 +10,8 @@
         @template.paragraph(sub, next)
     @elseif (sub is Link)
         @template.link(sub)
+    @elseif (sub is ListItem)
+        @template.list-item(sub)
     @elseif (sub is Text)
         @template.text(sub)
     @elseif (sub is ThematicBreak)
